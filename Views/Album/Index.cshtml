@@ -1,0 +1,90 @@
+@model IEnumerable<crudSimple.Models.Album>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/table.css" />
+</head>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Album Name</th>
+                <th>Cover Page</th>
+                <th>Artist</th>
+                <th>Genre</th>
+                <th>Release Date</th>
+                <th>Duration</th>
+                <th>Songs</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var album in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelData => album.Name)
+                    </td>
+                    <td>
+                        <img class="image" src="@Html.DisplayFor(modelData => album.AlbumImage)" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelData => album.Artist)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelData => album.Genre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelData => album.ReleaseDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelData => album.Duration)
+                    </td>
+                    <td>
+                        @if(album.Songs != null)
+                        {
+                            @Html.DisplayFor(modelData => album.Songs.Count)
+                        }
+                        else
+                        {
+                            <p>Not song in album</p>
+                        }
+                    </td>
+                    <td>
+                        <div class="wrapper">
+                            <div class="icon facebook">
+                                <div class="tooltip">Edit</div>
+                                @Html.ActionLink("E", "Edit", new { id = album.Id})
+                                <span><i class="fab fa-facebook-f"></i></span>
+                            </div>
+                            <div class="icon twitter">
+                                <div class="tooltip">Details</div>
+                                @Html.ActionLink("D", "Details", new { id = album.Id})
+                                <span><i class="fab fa-twitter"></i></span>
+                            </div>
+                            <div class="icon instagram">
+                                <div class="tooltip">Delete</div>
+                                @Html.ActionLink("X", "Delete", new { id = album.Id})
+                                <span><i class="fab fa-instagram"></i></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        <tbody>
+    </table>
+</div>
+

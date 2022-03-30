@@ -1,0 +1,82 @@
+@model crudSimple.Models.Album
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/table.css" />
+</head>
+
+<h1>Details album</h1>
+<hr>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Album Name</th>
+                <th>Cover Page</th>
+                <th>Artist</th>
+                <th>Genre</th>
+                <th>Release Date</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Name)
+                </td>
+                <td>
+                    <img class="image" src="@Html.DisplayFor(model => model.AlbumImage)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Artist)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Duration)
+                </td>
+            </tr>
+        <tbody>
+    </table>
+</div>
+
+<hr>
+<h1>Album Songs</h1>
+<hr>
+@if (Model.Songs != null)
+{
+    <div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var item in Model.Songs)
+                    {
+                        <td>
+                            @Html.DisplayFor(model => item.NameSong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Duration)
+                        </td>
+                    }
+            <tbody>
+        </table>
+    </div>
+}
+else{
+    <h3>Not song aviable</h3>
+}

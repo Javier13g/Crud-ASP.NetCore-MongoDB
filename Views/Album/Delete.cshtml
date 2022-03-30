@@ -1,0 +1,75 @@
+@model crudSimple.Models.Album
+
+<head>
+    <link rel="stylesheet" href="~/css/table.css" />
+</head>
+<h1>Delete</h1>
+<br>
+<h3>Are you sure want to delete this?</h3>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Album Name</th>
+                <th>Cover Page</th>
+                <th>Artist</th>
+                <th>Genre</th>
+                <th>Release Date</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+                <td>
+                    <img class="image" src="@Html.DisplayFor(model => model.AlbumImage)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Artist)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Duration)
+                </td>
+            </tr>
+        <tbody>
+    </table>
+</div>
+<hr>
+@if (Model.Songs != null)
+{
+    <div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var item in Model.Songs)
+                    {
+                        <td>
+                            @Html.DisplayFor(model => item.NameSong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Duration)
+                        </td>
+                    }
+            <tbody>
+        </table>
+    </div>
+}
+<form asp-action="Delete">
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="Index">Back to list</a>
+</form>
